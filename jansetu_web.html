@@ -1,0 +1,1324 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>JanSetu — Civic Intelligence Platform</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Inter, Arial, sans-serif;
+      background: #f4f7f8;
+      color: #172033;
+    }
+
+    button,
+    input,
+    select {
+      font: inherit;
+    }
+
+    .container {
+      width: min(1100px, 92%);
+      margin: auto;
+    }
+
+    /* ================= HEADER ================= */
+
+    header {
+      background: #ffffff;
+      border-bottom: 1px solid #e5e7eb;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .navbar {
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+    }
+
+    .logo {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: #0f766e;
+      color: white;
+      display: grid;
+      place-items: center;
+      font-weight: 800;
+      font-size: 19px;
+    }
+
+    .brand h2 {
+      font-size: 20px;
+    }
+
+    .brand span {
+      font-size: 11px;
+      color: #64748b;
+      display: block;
+    }
+
+    nav {
+      display: flex;
+      gap: 7px;
+    }
+
+    nav button {
+      border: 0;
+      background: transparent;
+      color: #64748b;
+      padding: 10px 14px;
+      border-radius: 9px;
+      cursor: pointer;
+    }
+
+    nav button:hover,
+    nav button.active {
+      background: #ccfbf1;
+      color: #0f766e;
+      font-weight: 700;
+    }
+
+    /* ================= SECTIONS ================= */
+
+    .page {
+      display: none;
+      padding: 50px 0;
+      animation: fade .25s ease;
+    }
+
+    .page.active {
+      display: block;
+    }
+
+    @keyframes fade {
+      from {
+        opacity: 0;
+        transform: translateY(5px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.25fr .75fr;
+      gap: 40px;
+      align-items: center;
+      min-height: 470px;
+    }
+
+    .eyebrow {
+      color: #0f766e;
+      font-size: 13px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      margin-bottom: 10px;
+    }
+
+    .hero h1 {
+      font-size: clamp(40px, 6vw, 68px);
+      line-height: 1;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 span {
+      color: #0f766e;
+    }
+
+    .hero p {
+      color: #64748b;
+      max-width: 620px;
+      font-size: 17px;
+      line-height: 1.7;
+      margin-bottom: 25px;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .primary,
+    .secondary {
+      border: 0;
+      border-radius: 10px;
+      padding: 13px 20px;
+      cursor: pointer;
+      min-height: 46px;
+      font-weight: 700;
+    }
+
+    .primary {
+      background: #0f766e;
+      color: white;
+    }
+
+    .primary:hover {
+      background: #115e59;
+    }
+
+    .secondary {
+      background: white;
+      border: 1px solid #dbe3e8;
+      color: #172033;
+    }
+
+    /* ================= HERO VISUAL ================= */
+
+    .hero-visual {
+      background: white;
+      border: 1px solid #e2e8f0;
+      border-radius: 22px;
+      padding: 25px;
+      box-shadow: 0 15px 40px rgba(15, 23, 42, .07);
+    }
+
+    .network {
+      display: grid;
+      gap: 12px;
+    }
+
+    .network-item {
+      padding: 15px;
+      border-radius: 13px;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .network-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      background: #ccfbf1;
+      color: #0f766e;
+      display: grid;
+      place-items: center;
+      font-weight: 800;
+    }
+
+    .network-item strong {
+      display: block;
+      font-size: 14px;
+    }
+
+    .network-item small {
+      color: #64748b;
+    }
+
+    .connector {
+      height: 16px;
+      width: 2px;
+      background: #99f6e4;
+      margin-left: 18px;
+    }
+
+    /* ================= CARDS ================= */
+
+    .section-title {
+      margin-bottom: 25px;
+    }
+
+    .section-title h1 {
+      font-size: 34px;
+      margin-bottom: 7px;
+    }
+
+    .section-title p {
+      color: #64748b;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .card {
+      background: white;
+      border: 1px solid #e2e8f0;
+      border-radius: 16px;
+      padding: 20px;
+    }
+
+    .metric {
+      font-size: 34px;
+      font-weight: 800;
+      margin: 8px 0;
+    }
+
+    .muted {
+      color: #64748b;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    /* ================= WORKFLOW ================= */
+
+    .workflow {
+      margin-top: 20px;
+      display: grid;
+      gap: 12px;
+    }
+
+    .step {
+      background: white;
+      border: 1px solid #e2e8f0;
+      border-radius: 14px;
+      padding: 16px;
+      display: grid;
+      grid-template-columns: 42px 1fr auto;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .step-number {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: #e2e8f0;
+      font-weight: 800;
+    }
+
+    .step.completed .step-number {
+      background: #ccfbf1;
+      color: #0f766e;
+    }
+
+    .step strong {
+      display: block;
+      margin-bottom: 3px;
+    }
+
+    .step small {
+      color: #64748b;
+    }
+
+    .status {
+      padding: 6px 9px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 700;
+      background: #f1f5f9;
+      color: #64748b;
+    }
+
+    .status.completed {
+      background: #dcfce7;
+      color: #166534;
+    }
+
+    .status.progress {
+      background: #fef3c7;
+      color: #92400e;
+    }
+
+    /* ================= REPORT ================= */
+
+    .report-box {
+      background: linear-gradient(135deg, #0f766e, #155e75);
+      color: white;
+      border-radius: 20px;
+      padding: 28px;
+      margin-top: 25px;
+    }
+
+    .report-box h2 {
+      margin-bottom: 8px;
+    }
+
+    .report-box p {
+      color: #d9fffa;
+      margin-bottom: 20px;
+    }
+
+    .report-box .primary {
+      background: white;
+      color: #0f766e;
+    }
+
+    /* ================= FORM ================= */
+
+    .form-card {
+      max-width: 700px;
+      margin: auto;
+    }
+
+    .form {
+      display: grid;
+      gap: 17px;
+      margin-top: 25px;
+    }
+
+    .field label {
+      display: block;
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 7px;
+    }
+
+    input,
+    select {
+      width: 100%;
+      border: 1px solid #dbe3e8;
+      border-radius: 10px;
+      padding: 13px;
+      background: white;
+      color: #172033;
+      outline: none;
+    }
+
+    input:focus,
+    select:focus {
+      border-color: #0f766e;
+      box-shadow: 0 0 0 3px #ccfbf1;
+    }
+
+    .notice {
+      display: none;
+      padding: 12px;
+      border-radius: 10px;
+      background: #ccfbf1;
+      color: #115e59;
+      font-size: 13px;
+    }
+
+    /* ================= TRACKING ================= */
+
+    .track-search {
+      display: flex;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .track-search input {
+      flex: 1;
+    }
+
+    .case-result {
+      margin-top: 25px;
+    }
+
+    .progress-container {
+      background: #e2e8f0;
+      height: 9px;
+      border-radius: 20px;
+      overflow: hidden;
+      margin: 12px 0 20px;
+    }
+
+    .progress-bar {
+      width: 78%;
+      height: 100%;
+      background: #0f766e;
+      border-radius: 20px;
+    }
+
+    .timeline {
+      display: grid;
+      gap: 10px;
+    }
+
+    .timeline div {
+      padding: 12px;
+      border-left: 3px solid #e2e8f0;
+      color: #64748b;
+    }
+
+    .timeline .done {
+      border-color: #0f766e;
+      color: #172033;
+    }
+
+    /* ================= IMPACT ================= */
+
+    .impact-list {
+      margin-top: 20px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .impact-item {
+      padding: 16px;
+      background: white;
+      border: 1px solid #e2e8f0;
+      border-radius: 13px;
+    }
+
+    .impact-item strong {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    /* ================= MOBILE ================= */
+
+    @media (max-width: 750px) {
+      .navbar {
+        flex-wrap: wrap;
+        padding: 12px 0;
+      }
+
+      nav {
+        width: 100%;
+        overflow-x: auto;
+      }
+
+      nav button {
+        white-space: nowrap;
+      }
+
+      .hero {
+        grid-template-columns: 1fr;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .step {
+        grid-template-columns: 40px 1fr;
+      }
+
+      .step .status {
+        grid-column: 2;
+        justify-self: start;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .page {
+        padding: 30px 0;
+      }
+
+      .hero h1 {
+        font-size: 45px;
+      }
+
+      .track-search {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ================= HEADER ================= -->
+
+  <header>
+    <div class="container navbar">
+
+      <div class="brand" data-page="home">
+        <div class="logo">JS</div>
+
+        <div>
+          <h2>JanSetu</h2>
+          <span>Civic Intelligence Platform</span>
+        </div>
+      </div>
+
+      <nav>
+        <button class="active" data-page="home">Overview</button>
+        <button data-page="report">Report Issue</button>
+        <button data-page="track">Track Case</button>
+        <button data-page="impact">Impact</button>
+      </nav>
+
+    </div>
+  </header>
+
+
+  <main>
+
+    <!-- ================= HOME ================= -->
+
+    <section id="home" class="page active">
+
+      <div class="container">
+
+        <div class="hero">
+
+          <div>
+
+            <div class="eyebrow">
+              Citizen → Evidence → Action
+            </div>
+
+            <h1>
+              Build a better
+              <span>JanSetu.</span>
+            </h1>
+
+            <p>
+              JanSetu creates a transparent bridge between citizens,
+              verified evidence, government execution and measurable
+              civic outcomes.
+            </p>
+
+            <div class="buttons">
+
+              <button class="primary" data-page="report">
+                Report a Problem
+              </button>
+
+              <button class="secondary" data-page="track">
+                Track a Case
+              </button>
+
+            </div>
+
+          </div>
+
+
+          <div class="hero-visual">
+
+            <div class="eyebrow">
+              How JanSetu works
+            </div>
+
+            <div class="network">
+
+              <div class="network-item">
+                <div class="network-icon">01</div>
+                <div>
+                  <strong>Citizen</strong>
+                  <small>Reports a civic issue</small>
+                </div>
+              </div>
+
+              <div class="connector"></div>
+
+              <div class="network-item">
+                <div class="network-icon">02</div>
+                <div>
+                  <strong>Evidence</strong>
+                  <small>Information is verified</small>
+                </div>
+              </div>
+
+              <div class="connector"></div>
+
+              <div class="network-item">
+                <div class="network-icon">03</div>
+                <div>
+                  <strong>Authority</strong>
+                  <small>Case is routed for action</small>
+                </div>
+              </div>
+
+              <div class="connector"></div>
+
+              <div class="network-item">
+                <div class="network-icon">04</div>
+                <div>
+                  <strong>Outcome</strong>
+                  <small>Execution and feedback</small>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- Metrics -->
+
+        <div class="grid">
+
+          <div class="card">
+            <div class="muted">Active Cases</div>
+            <div class="metric">1,284</div>
+            <div class="muted">
+              Cases currently moving through the workflow.
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="muted">Verified Reports</div>
+            <div class="metric">87%</div>
+            <div class="muted">
+              Reports containing supporting evidence.
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="muted">Resolved Cases</div>
+            <div class="metric">924</div>
+            <div class="muted">
+              Cases closed after outcome verification.
+            </div>
+          </div>
+
+        </div>
+
+
+        <!-- Workflow -->
+
+        <div style="margin-top:40px">
+
+          <div class="section-title">
+            <h1>Case Lifecycle</h1>
+            <p>
+              Follow a civic issue from the first report to the final outcome.
+            </p>
+          </div>
+
+
+          <div class="workflow">
+
+            <div class="step completed">
+
+              <div class="step-number">1</div>
+
+              <div>
+                <strong>Citizen Report</strong>
+                <small>
+                  Issue, location and evidence submitted
+                </small>
+              </div>
+
+              <span class="status completed">
+                Complete
+              </span>
+
+            </div>
+
+
+            <div class="step completed">
+
+              <div class="step-number">2</div>
+
+              <div>
+                <strong>Verification</strong>
+                <small>
+                  Evidence and field information checked
+                </small>
+              </div>
+
+              <span class="status completed">
+                Complete
+              </span>
+
+            </div>
+
+
+            <div class="step completed">
+
+              <div class="step-number">3</div>
+
+              <div>
+                <strong>Approval & Routing</strong>
+                <small>
+                  Relevant authority receives an actionable case
+                </small>
+              </div>
+
+              <span class="status completed">
+                Complete
+              </span>
+
+            </div>
+
+
+            <div class="step">
+
+              <div class="step-number">4</div>
+
+              <div>
+                <strong>Official Execution</strong>
+                <small>
+                  Work is assigned and carried out
+                </small>
+              </div>
+
+              <span class="status progress">
+                In Progress
+              </span>
+
+            </div>
+
+
+            <div class="step">
+
+              <div class="step-number">5</div>
+
+              <div>
+                <strong>Completion & Feedback</strong>
+                <small>
+                  Outcome verified and citizen feedback collected
+                </small>
+              </div>
+
+              <span class="status">
+                Pending
+              </span>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <div class="report-box">
+
+          <h2>
+            See a problem? Turn it into evidence.
+          </h2>
+
+          <p>
+            Create a structured civic report and follow its journey
+            through verification, routing and resolution.
+          </p>
+
+          <button class="primary" data-page="report">
+            Create a Report
+          </button>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ================= REPORT ================= -->
+
+    <section id="report" class="page">
+
+      <div class="container">
+
+        <div class="form-card">
+
+          <div class="section-title">
+            <h1>Report a Civic Issue</h1>
+            <p>
+              Create a structured case for verification and routing.
+            </p>
+          </div>
+
+
+          <div class="card">
+
+            <form class="form" id="reportForm">
+
+              <div class="field">
+
+                <label for="category">
+                  Issue Category
+                </label>
+
+                <select id="category">
+
+                  <option>Road / Pothole</option>
+                  <option>Street Lighting</option>
+                  <option>Water / Drainage</option>
+                  <option>Waste Management</option>
+                  <option>Public Infrastructure</option>
+                  <option>Other</option>
+
+                </select>
+
+              </div>
+
+
+              <div class="field">
+
+                <label for="area">
+                  Area / Locality
+                </label>
+
+                <input
+                  id="area"
+                  type="text"
+                  placeholder="Enter locality"
+                  required
+                />
+
+              </div>
+
+
+              <div class="field">
+
+                <label for="description">
+                  What happened?
+                </label>
+
+                <input
+                  id="description"
+                  type="text"
+                  placeholder="Briefly describe the issue"
+                  required
+                />
+
+              </div>
+
+
+              <div class="field">
+
+                <label for="evidence">
+                  Evidence
+                </label>
+
+                <input
+                  id="evidence"
+                  type="file"
+                  accept="image/*"
+                />
+
+              </div>
+
+
+              <button
+                class="primary"
+                type="submit"
+              >
+                Submit for Verification
+              </button>
+
+
+              <div
+                class="notice"
+                id="reportNotice"
+                aria-live="polite"
+              ></div>
+
+            </form>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ================= TRACK ================= -->
+
+    <section id="track" class="page">
+
+      <div class="container">
+
+        <div class="section-title">
+          <h1>Track Your Case</h1>
+
+          <p>
+            Follow the progress of a JanSetu civic report.
+          </p>
+        </div>
+
+
+        <div class="card">
+
+          <div class="track-search">
+
+            <input
+              id="caseId"
+              value="JS-2026-1048"
+              placeholder="Enter Case ID"
+            />
+
+            <button
+              class="primary"
+              id="trackButton"
+            >
+              Track
+            </button>
+
+          </div>
+
+
+          <div
+            class="case-result"
+            id="caseResult"
+          ></div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ================= IMPACT ================= -->
+
+    <section id="impact" class="page">
+
+      <div class="container">
+
+        <div class="section-title">
+
+          <h1>JanSetu Impact</h1>
+
+          <p>
+            Turning individual complaints into measurable civic intelligence.
+          </p>
+
+        </div>
+
+
+        <div class="grid">
+
+          <div class="card">
+
+            <div class="muted">
+              Cases Resolved
+            </div>
+
+            <div class="metric">
+              924
+            </div>
+
+            <p class="muted">
+              Cases closed after execution and verification.
+            </p>
+
+          </div>
+
+
+          <div class="card">
+
+            <div class="muted">
+              Verification Rate
+            </div>
+
+            <div class="metric">
+              87%
+            </div>
+
+            <p class="muted">
+              Reports supported by sufficient evidence.
+            </p>
+
+          </div>
+
+
+          <div class="card">
+
+            <div class="muted">
+              Active Cases
+            </div>
+
+            <div class="metric">
+              1,284
+            </div>
+
+            <p class="muted">
+              Current cases moving through the system.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="impact-list">
+
+          <div class="impact-item">
+
+            <strong>
+              Evidence Layer
+            </strong>
+
+            <span class="muted">
+              Structured photos, descriptions and verification signals
+              create a reliable evidence trail.
+            </span>
+
+          </div>
+
+
+          <div class="impact-item">
+
+            <strong>
+              Coordination Layer
+            </strong>
+
+            <span class="muted">
+              Actionable cases can be routed to the responsible authority.
+            </span>
+
+          </div>
+
+
+          <div class="impact-item">
+
+            <strong>
+              Intelligence Layer
+            </strong>
+
+            <span class="muted">
+              Recurring civic problems can be aggregated for planning,
+              analysis and prioritisation.
+            </span>
+
+          </div>
+
+
+          <div class="impact-item">
+
+            <strong>
+              Transparency Layer
+            </strong>
+
+            <span class="muted">
+              Citizens can see where their report is in the process.
+            </span>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- ================= JAVASCRIPT ================= -->
+
+  <script>
+
+    /* -----------------------------------------
+       PAGE NAVIGATION
+    ----------------------------------------- */
+
+    const pages = document.querySelectorAll(".page");
+    const pageButtons = document.querySelectorAll("[data-page]");
+
+    function showPage(pageId) {
+
+      pages.forEach(page => {
+        page.classList.remove("active");
+      });
+
+      const selectedPage = document.getElementById(pageId);
+
+      if (selectedPage) {
+        selectedPage.classList.add("active");
+      }
+
+      document.querySelectorAll("nav button").forEach(button => {
+        button.classList.toggle(
+          "active",
+          button.dataset.page === pageId
+        );
+      });
+
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+    }
+
+
+    pageButtons.forEach(button => {
+
+      button.addEventListener("click", () => {
+
+        showPage(button.dataset.page);
+
+      });
+
+    });
+
+
+    /* -----------------------------------------
+       REPORT FORM
+    ----------------------------------------- */
+
+    const reportForm =
+      document.getElementById("reportForm");
+
+    const reportNotice =
+      document.getElementById("reportNotice");
+
+
+    reportForm.addEventListener("submit", function(event) {
+
+      event.preventDefault();
+
+
+      const area =
+        document.getElementById("area").value.trim();
+
+      const description =
+        document.getElementById("description").value.trim();
+
+
+      if (!area || !description) {
+
+        reportNotice.style.display = "block";
+
+        reportNotice.textContent =
+          "Please enter the locality and a description.";
+
+        return;
+
+      }
+
+
+      const generatedId =
+        "JS-2026-" +
+        Math.floor(1000 + Math.random() * 9000);
+
+
+      reportNotice.style.display = "block";
+
+      reportNotice.innerHTML =
+        `
+        <strong>Report submitted successfully.</strong><br>
+        Your Case ID is <strong>${generatedId}</strong>.
+        Status: Awaiting verification.
+        `;
+
+
+      reportForm.reset();
+
+    });
+
+
+    /* -----------------------------------------
+       CASE TRACKING
+    ----------------------------------------- */
+
+    const trackButton =
+      document.getElementById("trackButton");
+
+    const caseResult =
+      document.getElementById("caseResult");
+
+
+    trackButton.addEventListener("click", function() {
+
+      const caseId =
+        document.getElementById("caseId")
+        .value
+        .trim();
+
+
+      if (!caseId) {
+
+        caseResult.innerHTML =
+          `
+          <div class="notice"
+               style="display:block">
+            Please enter a valid Case ID.
+          </div>
+          `;
+
+        return;
+
+      }
+
+
+      const safeCaseId =
+        caseId.replace(/[<>&'"]/g, "");
+
+
+      caseResult.innerHTML =
+
+        `
+
+        <div class="card">
+
+          <div class="muted">
+            CASE ID
+          </div>
+
+          <h2 style="margin-top:5px">
+            ${safeCaseId}
+          </h2>
+
+          <div
+            style="
+              margin-top:12px;
+              color:#0f766e;
+              font-weight:700;
+            "
+          >
+            Current Stage:
+            Official Execution
+          </div>
+
+
+          <div class="progress-container">
+
+            <div class="progress-bar"></div>
+
+          </div>
+
+
+          <div class="timeline">
+
+            <div class="done">
+              ✓ Citizen report submitted
+            </div>
+
+            <div class="done">
+              ✓ Evidence verified
+            </div>
+
+            <div class="done">
+              ✓ Authority routed
+            </div>
+
+            <div class="done">
+              → Official execution in progress
+            </div>
+
+            <div>
+              ○ Completion verification
+            </div>
+
+            <div>
+              ○ Citizen feedback
+            </div>
+
+          </div>
+
+        </div>
+
+        `;
+
+    });
+
+  </script>
+
+</body>
+</html>
+```
